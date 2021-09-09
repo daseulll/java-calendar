@@ -1,21 +1,23 @@
 package calendar;
+
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Sum {
 	public static void main(String[] args) {
+		int a, b;
+		System.out.println("두 수의 합을 입력하세요. : ");
+		
 		Scanner scanner = new Scanner(System.in);
-		String inputValue = scanner.nextLine();
+		String inputValue1, inputValue2;
+		
+		inputValue1 = scanner.next();
+		inputValue2 = scanner.next();
+		
+		a = Integer.parseInt(inputValue1);
+		b = Integer.parseInt(inputValue2);
+		
+//		System.out.println("두 수의 합은 " + (a + b)+ "입니다.");
+		System.out.printf("%d와 %d의 합은 %d입니다.", a, b, a + b);
 		scanner.close();
-		
-		String[] inputStrList = inputValue.split(" ");
-		
-		int[] InputIntList = new int[2];
-		InputIntList[0] = Integer.parseInt(inputStrList[0]);
-		InputIntList[1] = Integer.parseInt(inputStrList[1]);
-		
-		int sum = IntStream.of(InputIntList).sum();
-		System.out.println(sum);
-		
 	}
 }
