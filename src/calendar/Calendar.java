@@ -8,20 +8,22 @@ public class Calendar {
 	public int getLastDayOfMonth(int month) {
 		return LAST_DAYS[month - 1];
 	}
+	
+	public int getMonth(Scanner scanner) {
+		System.out.println("달을 입력하세요. ");
+		System.out.print("$");
+		return scanner.nextInt();
+	}
 
 	public static void main(String[] args) {
-		System.out.println("반복 횟수를 입력하세요.");
 		Scanner scanner = new Scanner(System.in);
-		int repetitionCount = scanner.nextInt();
-
-		System.out.println("달을 입력하세요. ");
-
 		Calendar cal = new Calendar();
-		String PROMPT = "$";
-		for (int i = 0; i < repetitionCount; i++) {
-			System.out.print(PROMPT);
-			int month = scanner.nextInt();
+		int month;
+		
+		month = cal.getMonth(scanner);
+		while (month != -1) {
 			System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getLastDayOfMonth(month));
+			month = cal.getMonth(scanner);
 		}
 		
 		System.out.println("Bye!");
