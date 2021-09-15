@@ -16,8 +16,10 @@ public class Calendar {
 
 		System.out.println("달을 입력하세요. ");
 
+		String PROMPT = "$";
 		int[] monthList = new int[repetitionCount];
 		for (int i = 0; i < repetitionCount; i++) {
+			System.out.print(PROMPT);
 			monthList[i] = scanner.nextInt();
 		}
 		scanner.close();
