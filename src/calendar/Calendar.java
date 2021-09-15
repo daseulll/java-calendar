@@ -8,22 +8,26 @@ public class Calendar {
 	public int getLastDayOfMonth(int month) {
 		return LAST_DAYS[month - 1];
 	}
-	
-	public int getMonth(Scanner scanner) {
-		System.out.println("달을 입력하세요. ");
-		System.out.print("$");
-		return scanner.nextInt();
-	}
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		Calendar cal = new Calendar();
-		int month;
+		int month = 1;
 		
-		month = cal.getMonth(scanner);
-		while (month != -1) {
+		while (true) {
+			System.out.println("달을 입력하세요. ");
+			System.out.print("$");
+			month = scanner.nextInt();
+			
+			if (month == -1) {
+				break;
+			}
+			
+			else if (month > 12) {
+				System.out.println("1과 12 사이의 값만 입력가능합니다.");
+				continue;
+			}
 			System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getLastDayOfMonth(month));
-			month = cal.getMonth(scanner);
 		}
 		
 		System.out.println("Bye!");
