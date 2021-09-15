@@ -16,17 +16,15 @@ public class Calendar {
 
 		System.out.println("달을 입력하세요. ");
 
+		Calendar cal = new Calendar();
 		String PROMPT = "$";
-		int[] monthList = new int[repetitionCount];
 		for (int i = 0; i < repetitionCount; i++) {
 			System.out.print(PROMPT);
-			monthList[i] = scanner.nextInt();
+			int month = scanner.nextInt();
+			System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getLastDayOfMonth(month));
 		}
+		
+		System.out.println("Bye!");
 		scanner.close();
-
-		Calendar cal = new Calendar();
-		for (int i = 0; i < repetitionCount; i++) {
-			System.out.printf("%d월은 %d일까지 있습니다.\n", monthList[i], cal.getLastDayOfMonth(monthList[i]));
-		}
 	}
 }
