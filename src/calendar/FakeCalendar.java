@@ -20,19 +20,14 @@ public class FakeCalendar {
 
 			int lastDayOfMonth = new Calendar().getLastDayOfMonth(month);
 
-			System.out.println("일 월  화  수 목 금 토");
-			System.out.println("================");
+			System.out.println(" SU MO TU WE TH FR SA");
+			System.out.println("=====================");
 
 			for (int i = 1; i <= lastDayOfMonth; i++) {
-				String statement = i + " ";
-
-				if (i < 10) {
-					statement += " ";
-				}
+				System.out.printf("%3d", i);
 				if (i % 7 == 0 || i == lastDayOfMonth) {
-					statement += "\n";
+					System.out.println();
 				}
-				System.out.print(statement);
 			}
 		}
 		scanner.close();
