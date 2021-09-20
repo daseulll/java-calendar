@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Calendar {
 	private static final int[] LAST_DAYS = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private static final int[] LEAP_LAST_DAYS = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
+	
 	public int getLastDayOfMonth(int year, int month) {
 		if (isLeapYear(year)) {
 			return LEAP_LAST_DAYS[month - 1];			
