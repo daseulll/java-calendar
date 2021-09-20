@@ -9,6 +9,7 @@ public class FakeCalendar {
 		while (true) {
 			System.out.println("달을 입력하세요.");
 			System.out.print("$");
+			int year = scanner.nextInt();
 			int month = scanner.nextInt();
 			if (month == -1) {
 				break;
@@ -18,7 +19,7 @@ public class FakeCalendar {
 				continue;
 			}
 
-			int lastDayOfMonth = new Calendar().getLastDayOfMonth(month);
+			int lastDayOfMonth = new Calendar().getLastDayOfMonth(year, month);
 
 			System.out.println(" SU MO TU WE TH FR SA");
 			System.out.println("=====================");
