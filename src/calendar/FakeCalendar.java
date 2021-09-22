@@ -3,29 +3,23 @@ package calendar;
 import java.util.Scanner;
 
 public class FakeCalendar {
-	public static int getDayIndex(String day) {
-		if (day == "SU") {
-			return 0;
+	public static int getDayIndex(String weekday) {
+		switch (weekday) {
+			case "SU":
+				return 0;	
+			case "MO":
+				return 1;	
+			case "TU":
+				return 2;	
+			case "WE":
+				return 3;	
+			case "TH":
+				return 4;	
+			case "FR":
+				return 5;	
+			case "SA":
+				return 6;	
 		}
-		else if (day.equals("MO")) {
-			return 1;
-		}
-		else if (day.equals("TU")) {
-			return 2;
-		}
-		else if (day.equals("WE")) {
-			return 3;
-		}
-		else if (day.equals("TH")) {
-			return 4;
-		}
-		else if (day.equals("FR")) {
-			return 5;
-		}
-		else if (day.equals("SA")) {
-			return 6;
-		}
-		
 		return 0;
 	}
 	
@@ -39,8 +33,8 @@ public class FakeCalendar {
 			int month = scanner.nextInt();
 			
 			System.out.println("첫째 날의 요일을 입력하세요. (SU MO TH WE TH FR SA)");
-			String day = scanner.next();
-			int dayIndex = getDayIndex(day);
+			String weekday = scanner.next();
+			int dayIndex = getDayIndex(weekday);
 			
 			
 			if (year == -1 || month == -1) {
