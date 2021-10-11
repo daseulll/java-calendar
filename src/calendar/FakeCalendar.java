@@ -3,24 +3,20 @@ package calendar;
 import java.util.Scanner;
 
 public class FakeCalendar {
-	public static int getDayIndex(String weekday) {
-		switch (weekday) {
-			case "SU":
-				return 0;	
-			case "MO":
-				return 1;	
-			case "TU":
-				return 2;	
-			case "WE":
-				return 3;	
-			case "TH":
-				return 4;	
-			case "FR":
-				return 5;	
-			case "SA":
-				return 6;	
+
+	public static int getDayIndex(int year, int month) {
+		// 그레고리력 1년 1월 1일은 월요일 (1)
+		int leapYearCount = (year / 4) - (year / 100) + (year / 400);
+		
+		int weekday = (year - leapYearCount) + (leapYearCount*2);
+		
+		for (int i = 1; i < month; i++) {
+			int lastDayOfMonth = new Calendar().getLastDayOfMonth(year, i);
+			int diff = lastDayOfMonth - 28;
+			weekday += diff;
 		}
-		return 0;
+				
+		return weekday % 7;
 	}
 	
 	public static void main(String[] args) {
@@ -32,9 +28,7 @@ public class FakeCalendar {
 			int year = scanner.nextInt();
 			int month = scanner.nextInt();
 			
-			System.out.println("첫째 날의 요일을 입력하세요. (SU MO TH WE TH FR SA)");
-			String weekday = scanner.next();
-			int dayIndex = getDayIndex(weekday);
+			int dayIndex = getDayIndex(year, month);
 			
 			
 			if (year == -1 || month == -1) {
@@ -47,6 +41,7 @@ public class FakeCalendar {
 
 			int lastDayOfMonth = new Calendar().getLastDayOfMonth(year, month);
 
+			System.out.printf("<< %d년 %d월 >>\n", year, month);
 			System.out.println(" SU MO TU WE TH FR SA");
 			System.out.println("=====================");
 			
