@@ -103,5 +103,6 @@ public class FakeCalendar {
 		scanner.close();
 
 		System.out.println("Bye!");
+		return;
 	}
 }
