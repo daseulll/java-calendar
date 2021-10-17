@@ -70,24 +70,29 @@ public class CalendarVersion2 {
 		printHelp();
 
 		Scanner scanner = new Scanner(System.in);
-		while (true) {
+		
+		boolean isLoop = true;
+		while (isLoop) {
 			System.out.println("명령 (1, 2, 3, h, q)");
 			System.out.printf(">");
 			String command_num = scanner.nextLine();
-			if (command_num.equals("1")) {
+			
+			switch (command_num) {
+			case "1":
 				registerSchedule(scanner);
-
-			} else if (command_num.equals("2")) {
-				searchSchedule(scanner);
-
-			} else if (command_num.equals("3")) {
-				showSchedule();
-
-			} else if (command_num.equals("h")) {
-				printHelp();
-			} else if (command_num.equals("q")) {
-				System.out.println("Bye");
 				break;
+			case "2":
+				searchSchedule(scanner);				
+				break;
+			case "3":
+				showSchedule();
+				break;
+			case "h":
+				printHelp();
+				break;
+			case "q":
+				System.out.println("Bye");
+				isLoop = false;
 			}
 		}
 		scanner.close();
