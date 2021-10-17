@@ -4,8 +4,9 @@ import java.util.*;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 
+
 public class CalendarVersion2 {
-	static HashMap<String, ArrayList<String>> calendar = new HashMap<String, ArrayList<String>>();
+	static HashMap<LocalDate, ArrayList<String>> calendar = new HashMap<LocalDate, ArrayList<String>>();
 
 	public static LocalDate parseDate(String strDate) {
 		return LocalDate.parse(strDate);
@@ -20,21 +21,20 @@ public class CalendarVersion2 {
 		System.out.printf(">");
 		String schedule = scanner.nextLine();
 
-		LocalDate date = parseDate(strDate);
-		ArrayList<String> scheduleList = calendar.get(strDate);
+		ArrayList<String> scheduleList = calendar.get(parseDate(strDate));
 
 		if (scheduleList == null) {
 			scheduleList = new ArrayList<String>();
 		}
 
 		scheduleList.add(schedule);
-		calendar.put(strDate, scheduleList);
+		calendar.put(parseDate(strDate), scheduleList);
 	}
 	public static void searchSchedule(Scanner scanner) {
 		System.out.println("[일정 검색] 날짜를 입력하세요.");
 		System.out.printf(">");
-		String date = scanner.nextLine();
-		ArrayList<String> scheduleList = calendar.get(date);
+		String strDate = scanner.nextLine();
+		ArrayList<String> scheduleList = calendar.get(parseDate(strDate));
 		
 		if (!(scheduleList == null)) {
 			System.out.println(scheduleList.size() + "개의 일정이 있습니다.");
@@ -48,15 +48,15 @@ public class CalendarVersion2 {
 	}
 	public static void showSchedule() {
 		LocalDateTime now = LocalDateTime.now();
-		Set<String> scheduleKeySet = calendar.keySet();
-		Iterator<String> iter = scheduleKeySet.iterator();
+		Set<LocalDate> scheduleKeySet = calendar.keySet();
+		Iterator<LocalDate> iter = scheduleKeySet.iterator();
 
 		ArrayList<Integer> scheduledDayList = new ArrayList<Integer>();
 		while (iter.hasNext()) {
-			String[] key = iter.next().split("-", 3);
-			if (Integer.parseInt(key[0]) == (now.getYear())
-					&& Integer.parseInt(key[1]) == now.getMonthValue()) {
-				scheduledDayList.add(Integer.parseInt(key[2]));
+			LocalDate scheduledDate = iter.next();
+			if (scheduledDate.getYear() == (now.getYear())
+					&& scheduledDate.getMonthValue() == now.getMonthValue()) {
+				scheduledDayList.add(scheduledDate.getDayOfMonth());
 			}
 		}
 		FakeCalendar.printScheduleCalendar(now.getYear(), now.getMonthValue(), scheduledDayList);
