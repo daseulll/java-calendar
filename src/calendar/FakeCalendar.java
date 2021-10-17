@@ -1,6 +1,7 @@
 package calendar;
 
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class FakeCalendar {
 
@@ -38,6 +39,44 @@ public class FakeCalendar {
 
 			if (currentDayIndex == 7 || i == lastDayOfMonth) {
 				currentDayIndex = 0;
+				System.out.println();
+			}
+		}
+	}
+
+	public static void printScheduleCalendar(int year, int month, ArrayList<Integer> scheduleList) {
+		System.out.printf("<< %d년 %d월 >>\n", year, month);
+		System.out.println(" SU MO TU WE TH FR SA");
+		System.out.println("=====================");
+
+		int lastDayOfMonth = new Calendar().getLastDayOfMonth(year, month);
+		int dayIndex = getDayIndex(year, month);
+
+		if (dayIndex > 0) {
+			System.out.printf(("%" + Integer.toString(dayIndex * 3) + "s"), " ");
+		}
+
+		int delim = 7 - dayIndex;
+		for (int i = 1; i <= lastDayOfMonth; i++) {
+			System.out.printf("%3d", i);
+
+			if (i % 7 == delim || i == lastDayOfMonth) {
+				System.out.println();
+
+				int start = i - 6;
+				if (i == lastDayOfMonth) {
+					int lastDayIndex = (dayIndex + (lastDayOfMonth - 1)) % 7;
+					start = i - lastDayIndex;
+				}
+
+				for (int j = start; j <= i; j++) {
+					if (!scheduleList.contains(j)) {
+						System.out.printf("%3s", " ");
+					} else {
+						System.out.printf("%3s", "·");
+					}
+
+				}
 				System.out.println();
 			}
 		}
