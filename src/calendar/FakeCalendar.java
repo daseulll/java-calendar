@@ -1,7 +1,6 @@
 package calendar;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class FakeCalendar {
 
@@ -101,7 +100,6 @@ public class FakeCalendar {
 			printCalendar(year, month);
 		}
 		scanner.close();
-
 		System.out.println("Bye!");
 		return;
 	}

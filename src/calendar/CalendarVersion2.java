@@ -1,28 +1,34 @@
 package calendar;
 
-import java.time.LocalDateTime;
 import java.util.*;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class CalendarVersion2 {
 	static HashMap<String, ArrayList<String>> calendar = new HashMap<String, ArrayList<String>>();
 
+	public static LocalDate parseDate(String strDate) {
+		return LocalDate.parse(strDate);
+	}
+	
 	public static void registerSchedule(Scanner scanner) {
 		System.out.println("[일정 등록] 날짜를 입력하세요.");
 		System.out.printf(">");
-		String date = scanner.nextLine();
+		String strDate = scanner.nextLine();
 
 		System.out.println("일정을 등록하세요.");
 		System.out.printf(">");
 		String schedule = scanner.nextLine();
 
-		ArrayList<String> scheduleList = calendar.get(date);
+		LocalDate date = parseDate(strDate);
+		ArrayList<String> scheduleList = calendar.get(strDate);
 
 		if (scheduleList == null) {
 			scheduleList = new ArrayList<String>();
 		}
 
 		scheduleList.add(schedule);
-		calendar.put(date, scheduleList);
+		calendar.put(strDate, scheduleList);
 	}
 	public static void searchSchedule(Scanner scanner) {
 		System.out.println("[일정 검색] 날짜를 입력하세요.");
