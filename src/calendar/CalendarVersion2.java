@@ -83,6 +83,8 @@ public class CalendarVersion2 {
 			} else if (command_num.equals("3")) {
 				showSchedule();
 
+			} else if (command_num.equals("h")) {
+				printHelp();
 			} else if (command_num.equals("q")) {
 				System.out.println("Bye");
 				break;
