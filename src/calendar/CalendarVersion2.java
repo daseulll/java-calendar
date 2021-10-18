@@ -3,19 +3,29 @@ package calendar;
 import java.util.*;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
-
+import java.util.regex.Pattern;
 
 public class CalendarVersion2 {
 	static HashMap<LocalDate, ArrayList<String>> calendar = new HashMap<LocalDate, ArrayList<String>>();
 
+	public static boolean validateDateInput(String strDate) {
+		String regex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|12[0-9]|3[01])$";
+		return Pattern.matches(regex, strDate);
+	}
+	
 	public static LocalDate parseDate(String strDate) {
 		return LocalDate.parse(strDate);
 	}
 	
 	public static void registerSchedule(Scanner scanner) {
-		System.out.println("[일정 등록] 날짜를 입력하세요.");
+		System.out.println("[일정 등록] 날짜를 입력하세요. (yyyy-mm-dd)");
 		System.out.printf(">");
-		String strDate = scanner.nextLine();
+		String strDate = scanner.nextLine().trim();
+		
+		if (!validateDateInput(strDate)) {
+			System.out.println("yyyy-mm-dd 형식이 아닙니다! 다시 입력해주세요.");
+			registerSchedule(scanner);
+		}
 
 		System.out.println("일정을 등록하세요.");
 		System.out.printf(">");
@@ -33,7 +43,12 @@ public class CalendarVersion2 {
 	public static void searchSchedule(Scanner scanner) {
 		System.out.println("[일정 검색] 날짜를 입력하세요.");
 		System.out.printf(">");
-		String strDate = scanner.nextLine();
+		String strDate = scanner.nextLine().trim();
+		if (!validateDateInput(strDate)) {
+			System.out.println("yyyy-mm-dd 형식이 아닙니다! 다시 입력해주세요.");
+			registerSchedule(scanner);
+		}
+
 		ArrayList<String> scheduleList = calendar.get(parseDate(strDate));
 		
 		if (!(scheduleList == null)) {
@@ -74,7 +89,6 @@ public class CalendarVersion2 {
 	
 	public static void main(String[] args) {
 		printHelp();
-
 		Scanner scanner = new Scanner(System.in);
 		
 		boolean isLoop = true;
