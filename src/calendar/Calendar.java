@@ -26,27 +26,35 @@ public class Calendar {
 	
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		Calendar cal = new Calendar();
 
-		while (true) {
-			System.out.println("출력할 연도와 월을 입력하세요. ex) 2021 9");
-			System.out.print("$");
-			int year = scanner.nextInt();
-			int month = scanner.nextInt();
-
-			if (year == -1 || month == -1) {
-				break;
-			}
-
-			else if (month > 12) {
-				System.out.println("1과 12 사이의 값만 입력가능합니다.");
-				continue;
-			}
+		CalendarVersion2.printHelp();
+		
+		boolean isLoop = true;
+		while (isLoop) {
+			System.out.println("명령 (1, 2, 3, h, q)");
+			System.out.printf(">");
+			String command_num = scanner.nextLine();
 			
-			System.out.printf("%d년 %d월은 %d일까지 있습니다.\n", year, month, cal.getLastDayOfMonth(year, month));
+			switch (command_num) {
+			case "1":
+				CalendarVersion2.registerSchedule(scanner);
+				break;
+			case "2":
+				CalendarVersion2.searchSchedule(scanner);				
+				break;
+			case "3":
+				CalendarVersion2.showSchedule();
+				break;
+			case "h":
+				CalendarVersion2.printHelp();
+				break;
+			case "q":
+				System.out.println("Bye");
+				isLoop = false;
+			}
 		}
+		scanner.close();
 
 		System.out.println("Bye!");
-		scanner.close();
 	}
 }
