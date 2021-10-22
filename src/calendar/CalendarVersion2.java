@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class CalendarVersion2 {
-	static HashMap<LocalDate, ArrayList<String>> calendar = new HashMap<LocalDate, ArrayList<String>>();
+	static HashMap<LocalDate, ArrayList<ScheduleItem>> calendar = new HashMap<LocalDate, ArrayList<ScheduleItem>>();
 
 	public static boolean validateDateInput(String strDate) {
 		String regex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|12[0-9]|3[01])$";
@@ -29,15 +29,14 @@ public class CalendarVersion2 {
 
 		System.out.println("일정을 등록하세요.");
 		System.out.printf(">");
-		String schedule = scanner.nextLine();
-
-		ArrayList<String> scheduleList = calendar.get(parseDate(strDate));
-
+		String detail = scanner.nextLine();
+		
+		ArrayList<ScheduleItem> scheduleList = calendar.get(ScheduleItem.getLocalDateFromString(strDate));
 		if (scheduleList == null) {
-			scheduleList = new ArrayList<String>();
+			scheduleList = new ArrayList<ScheduleItem>();
 		}
 
-		scheduleList.add(schedule);
+		scheduleList.add(new ScheduleItem(strDate, detail));
 		calendar.put(parseDate(strDate), scheduleList);
 	}
 	public static void searchSchedule(Scanner scanner) {
@@ -49,7 +48,7 @@ public class CalendarVersion2 {
 			registerSchedule(scanner);
 		}
 
-		ArrayList<String> scheduleList = calendar.get(parseDate(strDate));
+		ArrayList<ScheduleItem> scheduleList = calendar.get(ScheduleItem.getLocalDateFromString(strDate));
 		
 		if (!(scheduleList == null)) {
 			System.out.println(scheduleList.size() + "개의 일정이 있습니다.");
