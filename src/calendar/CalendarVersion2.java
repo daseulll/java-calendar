@@ -9,7 +9,7 @@ public class CalendarVersion2 {
 	static HashMap<LocalDate, ArrayList<ScheduleItem>> calendar = new HashMap<LocalDate, ArrayList<ScheduleItem>>();
 
 	public static boolean validateDateInput(String strDate) {
-		String regex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|12[0-9]|3[01])$";
+		String regex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
 		return Pattern.matches(regex, strDate);
 	}
 	
