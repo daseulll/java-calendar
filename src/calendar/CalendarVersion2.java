@@ -54,7 +54,7 @@ public class CalendarVersion2 {
 			System.out.println(scheduleList.size() + "개의 일정이 있습니다.");
 			
 			for (int i = 0; i < scheduleList.size(); i++) {
-				System.out.println(i + 1 + "." + scheduleList.get(i));
+				System.out.println(i + 1 + "." + scheduleList.get(i).getDetail());
 			}					
 		} else {
 			System.out.println("일정이 없습니다.");
