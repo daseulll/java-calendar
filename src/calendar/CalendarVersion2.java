@@ -39,6 +39,7 @@ public class CalendarVersion2 {
 
 		scheduleList.add(new ScheduleItem(strDate, detail));
 		schedule.put(parseDate(strDate), scheduleList);
+		storeSchedule(schedule);
 	}
 
 	public static void searchSchedule(Scanner scanner, HashMap<LocalDate, ArrayList<ScheduleItem>> schedule) {
