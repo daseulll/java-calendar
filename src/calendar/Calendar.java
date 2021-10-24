@@ -1,5 +1,8 @@
 package calendar;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Calendar {
@@ -25,36 +28,36 @@ public class Calendar {
 	}
 	
 	public static void main(String[] args) {
+		HashMap<LocalDate, ArrayList<ScheduleItem>> schedule = CalendarVersion2.getSchedule(); 
+		CalendarVersion2.printHelp();
+
 		Scanner scanner = new Scanner(System.in);
 
-		CalendarVersion2.printHelp();
-		
 		boolean isLoop = true;
 		while (isLoop) {
 			System.out.println("명령 (1, 2, 3, h, q)");
 			System.out.printf(">");
 			String command_num = scanner.nextLine();
-			
+
 			switch (command_num) {
 			case "1":
-				CalendarVersion2.registerSchedule(scanner);
+				CalendarVersion2.registerSchedule(scanner, schedule);
 				break;
 			case "2":
-				CalendarVersion2.searchSchedule(scanner);				
+				CalendarVersion2.searchSchedule(scanner, schedule);
 				break;
 			case "3":
-				CalendarVersion2.showSchedule();
+				CalendarVersion2.showSchedule(schedule);
 				break;
 			case "h":
 				CalendarVersion2.printHelp();
 				break;
 			case "q":
+				CalendarVersion2.storeSchedule();
 				System.out.println("Bye");
 				isLoop = false;
 			}
 		}
 		scanner.close();
-
-		System.out.println("Bye!");
 	}
 }
