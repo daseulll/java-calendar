@@ -53,7 +53,7 @@ public class Calendar {
 				CalendarVersion2.printHelp();
 				break;
 			case "q":
-				CalendarVersion2.storeSchedule();
+				CalendarVersion2.storeSchedule(schedule);
 				System.out.println("Bye");
 				isLoop = false;
 			}

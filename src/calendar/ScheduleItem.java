@@ -1,8 +1,14 @@
 package calendar;
 
 import java.time.LocalDate;
+import java.io.*;
 
-class ScheduleItem {
+public class ScheduleItem implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2394156325559121584L;
+
 	private LocalDate ScheduleDate;
 	private String detail;
 	

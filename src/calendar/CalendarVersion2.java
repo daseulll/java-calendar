@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 public class CalendarVersion2 {
 	private static String fileName = "schedule.ser";
-	static HashMap<LocalDate, ArrayList<ScheduleItem>> calendar = new HashMap<LocalDate, ArrayList<ScheduleItem>>();
 	
 	public static boolean validateDateInput(String strDate) {
 		String regex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
@@ -33,13 +32,13 @@ public class CalendarVersion2 {
 		System.out.printf(">");
 		String detail = scanner.nextLine();
 
-		ArrayList<ScheduleItem> scheduleList = calendar.get(ScheduleItem.getLocalDateFromString(strDate));
+		ArrayList<ScheduleItem> scheduleList = schedule.get(ScheduleItem.getLocalDateFromString(strDate));
 		if (scheduleList == null) {
 			scheduleList = new ArrayList<ScheduleItem>();
 		}
 
 		scheduleList.add(new ScheduleItem(strDate, detail));
-		calendar.put(parseDate(strDate), scheduleList);
+		schedule.put(parseDate(strDate), scheduleList);
 	}
 
 	public static void searchSchedule(Scanner scanner, HashMap<LocalDate, ArrayList<ScheduleItem>> schedule) {
@@ -51,7 +50,7 @@ public class CalendarVersion2 {
 			registerSchedule(scanner, schedule);
 		}
 
-		ArrayList<ScheduleItem> scheduleList = calendar.get(ScheduleItem.getLocalDateFromString(strDate));
+		ArrayList<ScheduleItem> scheduleList = schedule.get(ScheduleItem.getLocalDateFromString(strDate));
 
 		if (!(scheduleList == null)) {
 			System.out.println(scheduleList.size() + "개의 일정이 있습니다.");
@@ -66,7 +65,7 @@ public class CalendarVersion2 {
 
 	public static void showSchedule(HashMap<LocalDate, ArrayList<ScheduleItem>> schedule) {
 		LocalDateTime now = LocalDateTime.now();
-		Set<LocalDate> scheduleKeySet = calendar.keySet();
+		Set<LocalDate> scheduleKeySet = schedule.keySet();
 		Iterator<LocalDate> iter = scheduleKeySet.iterator();
 
 		ArrayList<Integer> scheduledDayList = new ArrayList<Integer>();
@@ -79,14 +78,36 @@ public class CalendarVersion2 {
 		FakeCalendar.printScheduleCalendar(now.getYear(), now.getMonthValue(), scheduledDayList);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static HashMap<LocalDate, ArrayList<ScheduleItem>> getSchedule() {
-		HashMap<LocalDate, ArrayList<ScheduleItem>> schedule = new HashMap<LocalDate, ArrayList<ScheduleItem>>();
-		return schedule;
-		
+		HashMap<LocalDate, ArrayList<ScheduleItem>> schedule;
+		try {
+
+			FileInputStream fis = new FileInputStream(fileName);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			ObjectInputStream in = new ObjectInputStream(bis);
+			
+			schedule = (HashMap<LocalDate, ArrayList<ScheduleItem>>) in.readObject();
+			in.close();
+			return schedule;
+			
+		} catch (Exception e){
+			return new HashMap<LocalDate, ArrayList<ScheduleItem>>();				
+		}
 	}
 	
-	public static void storeSchedule() {
-		System.out.println("storeSchedule");
+	public static void storeSchedule(HashMap<LocalDate, ArrayList<ScheduleItem>> schedule) {
+		try {
+			FileOutputStream fos = new FileOutputStream(fileName);
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			ObjectOutputStream out = new ObjectOutputStream(bos);
+			
+			out.writeObject(schedule);
+			out.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void printHelp() {
