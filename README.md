@@ -25,3 +25,7 @@
 
 - 등록한 일정이 있을 경우 달력에 표시
 <img src="https://user-images.githubusercontent.com/39873335/138578038-5971bfe2-e8c1-42c9-8b8a-4d12cb386b9c.png" width="250" height="180">
+
+
+** 참고사항
+- [만들어 가면서 배우는 Java 플레이그라운드](https://www.inflearn.com/course/java-codesquad/dashboard) 강의를 학습하며 만든 프로그램이지만, 스스로 고민하여 구현한 코드가 많아 실제 강의 코드와 많이 다릅니다.
